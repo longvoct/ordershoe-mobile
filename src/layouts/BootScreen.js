@@ -56,7 +56,7 @@ const BootScreen = () => {
             onLayout={onLayout}
             style={{
               position: 'absolute',
-              bottom: 70,
+              bottom: 100,
               left: '50%',
               transform: widthLoading
                 ? [{translateX: -0.5 * widthLoading}]

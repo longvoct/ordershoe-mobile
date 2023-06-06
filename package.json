@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.0",
     "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
@@ -18,8 +19,8 @@
     "btoa": "^1.2.1",
     "buffer": "^6.0.3",
     "link": "^1.5.1",
-    "native-base": "^3.4.28",
     "react": "18.2.0",
+    "react-hook-form": "^7.44.3",
     "react-native": "^0.71.8",
     "react-native-document-picker": "^9.0.1",
     "react-native-image-picker": "^5.4.0",
@@ -27,8 +28,10 @@
     "react-native-screens": "^3.20.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-swiper": "^1.6.0",
+    "react-native-vector-icons": "^9.2.0",
     "react-native-woocommerce-api": "^1.8.8",
-    "rn-fetch-blob": "^0.12.0"
+    "rn-fetch-blob": "^0.12.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
