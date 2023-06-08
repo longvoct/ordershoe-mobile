@@ -51,7 +51,7 @@ const HomeScreen = ({navigation}) => {
     try {
       const response = await WooCommerceAPI.get('products');
       setProducts(response.data);
-      console.log('🚀 ~ getProducts ~ response.data:', response.data);
+      // console.log('🚀 ~ getProducts ~ response.data:', response.data);
     } catch (error) {
       console.log(error);
     }

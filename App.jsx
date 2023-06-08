@@ -5,6 +5,7 @@ import HomeScreen from './src/views/HomeScreen';
 import LoginScreen from './src/views/LoginScreen';
 import AddProductScreen from './src/views/AddProductScreen';
 import GetStartedScreen from './src/views/GetStartedScreen';
+import DrawerNavigation from './src/layouts/DrawerNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,8 +17,7 @@ function App() {
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="GetStartedScreen" component={GetStartedScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="AddProductScreen" component={AddProductScreen} />
+        <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

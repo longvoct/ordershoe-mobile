@@ -14,7 +14,6 @@ import config from '../utils/config';
 import {useForm, Controller} from 'react-hook-form';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const schema = Yup.object({
   email: Yup.string()
@@ -53,12 +52,13 @@ const LoginScreen = ({navigation}) => {
       );
 
       const {token} = response.data;
-
+      console.log('🚀 ~ handleLogin ~ token:', token);
       await AsyncStorage.setItem('accessToken', token);
-      await AsyncStorage.setItem('email', data.email);
+      await AsyncStorage.setItem('email', data?.email);
+      console.log('🚀 ~ handleLogin ~ data?.email:', data?.email);
 
       // Alert.alert('Login successful!');
-      navigation.navigate('AddProductScreen');
+      navigation.navigate('DrawerNavigation');
     } catch (error) {
       console.log('Message:', errors);
       setLoading(false);
