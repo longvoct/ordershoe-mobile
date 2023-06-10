@@ -3,10 +3,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import HomeScreen from '../views/HomeScreen';
 import CartScreen from '../views/CartScreen';
 import OrderScreen from '../views/OrderScreen';
 import ProfileScreen from '../views/ProfileScreen';
+import HomeMain from '../views/HomeMain';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,8 +28,8 @@ const TabsNavigation = () => {
         },
       }}>
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="HomeMain"
+        component={HomeMain}
         options={{
           tabBarLabelStyle: {
             fontSize: 11,

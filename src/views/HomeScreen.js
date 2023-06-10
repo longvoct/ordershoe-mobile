@@ -1,44 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {
   View,
-  Text,
   FlatList,
   Image,
   StatusBar,
   ScrollView,
   Dimensions,
 } from 'react-native';
-import axios from 'axios';
-import {decode, encode} from 'base-64';
-import config from '../utils/config';
 import HeaderLayout from '../layouts/HeaderLayout';
 import Title from '../components/Title';
+import CardLarge from '../components/CardLarge';
+import CardProduct from '../components/CardProduct';
+import {WooCommerceAPI} from '../utils/wooConfig';
 
 const {width} = Dimensions.get('window');
-
-if (!global.btoa) {
-  global.btoa = encode;
-}
-if (!global.atob) {
-  global.atob = decode;
-}
-
-const WooCommerceAPI = axios.create({
-  baseURL: `${config.url}/wp-json/wc/v3/`,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  auth: {
-    username: `${config.consumer_key}`,
-    password: `${config.consumer_secret}`,
-  },
-});
 
 const HomeScreen = ({navigation}) => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
-  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     getNewProducts();
@@ -71,42 +50,14 @@ const HomeScreen = ({navigation}) => {
         },
       });
       setFeaturedProducts(response.data);
-      // console.log('🚀 ~ getFeaturedProducts ~ response:', response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Render một sản phẩm
   const renderItem = ({item}) => {
     return (
-      <View style={{marginRight: 20}}>
-        <Image
-          source={{uri: item.images[0].src}}
-          style={{width: 200, height: 150, borderRadius: 8}}
-        />
-        <Text
-          numberOfLines={2}
-          style={{
-            width: 200,
-            marginTop: 5,
-            fontFamily: 'Poppins-SemiBold',
-            fontSize: 13,
-            color: '#212121',
-          }}>
-          {item.name}
-        </Text>
-        <Text
-          numberOfLines={2}
-          style={{
-            width: 150,
-            marginTop: 0,
-            fontSize: 15,
-            fontFamily: 'Poppins-Medium',
-          }}>
-          ₫{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-        </Text>
-      </View>
+      <CardLarge navigation={navigation} idProduct={item.id} item={item} />
     );
   };
 
@@ -180,45 +131,7 @@ const HomeScreen = ({navigation}) => {
           <FlatList
             style={{width: '100%'}}
             data={featuredProducts}
-            renderItem={({item}) => (
-              <View
-                style={{
-                  marginTop: 15,
-                  width: (width - 50) / 2 - 10,
-                  height: '100%',
-                  marginHorizontal: 10,
-                }}>
-                <Image
-                  source={{uri: item.images[0].src}}
-                  resizeMode="cover"
-                  style={{
-                    height: (width - 50) / 2 - 10,
-                    borderRadius: 8,
-                  }}
-                />
-                <Text
-                  numberOfLines={2}
-                  style={{
-                    width: 150,
-                    marginTop: 5,
-                    fontFamily: 'Poppins-SemiBold',
-                    fontSize: 13,
-                    color: '#212121',
-                  }}>
-                  {item.name}
-                </Text>
-                <Text
-                  numberOfLines={2}
-                  style={{
-                    width: 150,
-                    marginTop: 5,
-                    fontSize: 13,
-                    fontFamily: 'Poppins-Medium',
-                  }}>
-                  ₫{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                </Text>
-              </View>
-            )}
+            renderItem={({item}) => <CardProduct item={item}></CardProduct>}
             keyExtractor={item => item.id}
             numColumns={2}
           />

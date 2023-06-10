@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {getUserInfo} from '../utils/auth';
 
 const HeaderLayout = () => {

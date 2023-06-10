@@ -95,7 +95,7 @@ const CustomDrawer = ({...props}) => {
               fontWeight: '500',
               fontSize: 16,
             }}>
-            Cài đặt
+            Settings
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -110,7 +110,7 @@ const CustomDrawer = ({...props}) => {
               fontWeight: '500',
               fontSize: 16,
             }}>
-            Đăng xuất
+            Log out
           </Text>
         </TouchableOpacity>
       </View>
