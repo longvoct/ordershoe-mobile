@@ -3,19 +3,15 @@ import {
   View,
   Text,
   FlatList,
-  Button,
   Image,
   StatusBar,
   ScrollView,
-  VirtualizedList,
   Dimensions,
-  StyleSheet,
-  SafeAreaView,
 } from 'react-native';
 import axios from 'axios';
 import {decode, encode} from 'base-64';
-// import Carousel, {Pagination} from 'react-native-snap-carousel';
 import config from '../utils/config';
+d;
 import HeaderLayout from '../layouts/HeaderLayout';
 import Title from '../components/Title';
 
