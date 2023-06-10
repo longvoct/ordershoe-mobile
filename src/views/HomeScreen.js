@@ -11,7 +11,6 @@ import {
 import axios from 'axios';
 import {decode, encode} from 'base-64';
 import config from '../utils/config';
-d;
 import HeaderLayout from '../layouts/HeaderLayout';
 import Title from '../components/Title';
 
