@@ -10,7 +10,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {getUserInfo} from '../utils/api';
+import {getUserInfo} from '../utils/auth';
 
 const CustomDrawer = ({...props}) => {
   const [userInfo, setUserInfo] = useState(null);

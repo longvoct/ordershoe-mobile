@@ -16,7 +16,15 @@ export const getUserInfo = async () => {
   });
 
   const {name, avatar_urls} = response.data;
+
   const avatar = avatar_urls[96]; // Change the size of the avatar as needed
 
+  // console.log(
+  //   '🚀 ~ getUserInfo ~ token, email, name, avatar:',
+  //   token,
+  //   email,
+  //   name,
+  //   avatar,
+  // );
   return {token, email, name, avatar};
 };

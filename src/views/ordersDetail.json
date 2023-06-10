@@ -1,0 +1,209 @@
+{
+  "_links": {"collection": [[]], "self": [[]]},
+  "attributes": [
+    {
+      "id": 1,
+      "name": "Màu sắc",
+      "options": [],
+      "position": 0,
+      "variation": true,
+      "visible": true
+    },
+    {
+      "id": 7,
+      "name": "Loại giày",
+      "options": [],
+      "position": 1,
+      "variation": false,
+      "visible": false
+    },
+    {
+      "id": 8,
+      "name": "Màu chủ đạo",
+      "options": [],
+      "position": 2,
+      "variation": false,
+      "visible": false
+    },
+    {
+      "id": 6,
+      "name": "Giá",
+      "options": [],
+      "position": 3,
+      "variation": false,
+      "visible": false
+    },
+    {
+      "id": 5,
+      "name": "Kích cỡ",
+      "options": [],
+      "position": 4,
+      "variation": true,
+      "visible": true
+    }
+  ],
+  "average_rating": "0.00",
+  "backordered": false,
+  "backorders": "no",
+  "backorders_allowed": false,
+  "button_text": "",
+  "catalog_visibility": "visible",
+  "categories": [{"id": 57, "name": "Men", "slug": "giay-nam"}],
+  "cross_sell_ids": [],
+  "date_created": "2023-06-05T21:28:09",
+  "date_created_gmt": "2023-06-05T14:28:09",
+  "date_modified": "2023-06-09T18:30:58",
+  "date_modified_gmt": "2023-06-09T11:30:58",
+  "date_on_sale_from": null,
+  "date_on_sale_from_gmt": null,
+  "date_on_sale_to": null,
+  "date_on_sale_to_gmt": null,
+  "default_attributes": [],
+  "description": "",
+  "dimensions": {"height": "", "length": "", "width": ""},
+  "download_expiry": 0,
+  "download_limit": 0,
+  "downloadable": false,
+  "downloads": [],
+  "external_url": "",
+  "featured": true,
+  "grouped_products": [],
+  "has_options": true,
+  "id": 7999,
+  "images": [
+    {
+      "alt": "",
+      "date_created": "2023-05-28T20:42:24",
+      "date_created_gmt": "2023-05-28T06:42:24",
+      "date_modified": "2023-05-28T20:42:24",
+      "date_modified_gmt": "2023-05-28T06:42:24",
+      "id": 4058,
+      "name": "150207c_106_9y_prem.jpg",
+      "src": "http://converse.azdigi.shop/wp-content/uploads/2023/05/150207c_106_9y_prem.jpg"
+    },
+    {
+      "alt": "",
+      "date_created": "2023-05-28T20:42:29",
+      "date_created_gmt": "2023-05-28T06:42:29",
+      "date_modified": "2023-05-28T20:42:29",
+      "date_modified_gmt": "2023-05-28T06:42:29",
+      "id": 4059,
+      "name": "150207c_106_c_prem_4.jpg",
+      "src": "http://converse.azdigi.shop/wp-content/uploads/2023/05/150207c_106_c_prem_4.jpg"
+    },
+    {
+      "alt": "",
+      "date_created": "2023-05-28T20:42:34",
+      "date_created_gmt": "2023-05-28T06:42:34",
+      "date_modified": "2023-05-28T20:42:34",
+      "date_modified_gmt": "2023-05-28T06:42:34",
+      "id": 4060,
+      "name": "150207c_106_d_prem_4.jpg",
+      "src": "http://converse.azdigi.shop/wp-content/uploads/2023/05/150207c_106_d_prem_4.jpg"
+    }
+  ],
+  "low_stock_amount": null,
+  "manage_stock": false,
+  "menu_order": 0,
+  "meta_data": [
+    {"id": 133031, "key": "_psad_featured_order", "value": "3440000"}
+  ],
+  "name": "Converse x Comme des Garçons PLAY Chuck 70 Low Top",
+  "on_sale": false,
+  "parent_id": 0,
+  "permalink": "http://converse.azdigi.shop/san-pham/converse-x-comme-des-garcons-play-chuck-70-low-top-10/",
+  "price": "3440000",
+  "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#8363;</span>3,440,000</bdi></span>",
+  "purchasable": true,
+  "purchase_note": "",
+  "rating_count": 0,
+  "regular_price": "",
+  "related_ids": [4407, 4416, 4406, 4444, 4437],
+  "reviews_allowed": true,
+  "sale_price": "",
+  "shipping_class": "",
+  "shipping_class_id": 0,
+  "shipping_required": true,
+  "shipping_taxable": true,
+  "short_description": "",
+  "sku": "59402A",
+  "slug": "converse-x-comme-des-garcons-play-chuck-70-low-top-10",
+  "sold_individually": false,
+  "status": "publish",
+  "stock_quantity": null,
+  "stock_status": "instock",
+  "tags": [],
+  "tax_class": "",
+  "tax_status": "taxable",
+  "thwvsf_swatches": [
+    {
+      "id": 1,
+      "name": "Màu sắc",
+      "styles": [],
+      "terms": [],
+      "type": "label",
+      "variation": true
+    },
+    {
+      "id": 7,
+      "name": "Loại giày",
+      "styles": [],
+      "terms": [],
+      "type": "radio",
+      "variation": false
+    },
+    {
+      "id": 8,
+      "name": "Màu chủ đạo",
+      "styles": [],
+      "terms": [],
+      "type": "label",
+      "variation": false
+    },
+    {
+      "id": 6,
+      "name": "Giá",
+      "styles": [],
+      "terms": [],
+      "type": "label",
+      "variation": false
+    },
+    {
+      "id": 5,
+      "name": "Kích cỡ",
+      "styles": [],
+      "terms": [],
+      "type": "label",
+      "variation": true
+    }
+  ],
+  "total_sales": 1,
+  "type": "variable",
+  "upsell_ids": [],
+  "variations": [8013],
+  "virtual": false,
+  "weight": "1000",
+  "yoast_head": "",
+  "yoast_head_json": {
+    "article_modified_time": "2023-06-09T11:30:58+00:00",
+    "canonical": "http://converse.azdigi.shop/san-pham/converse-x-comme-des-garcons-play-chuck-70-low-top-10/",
+    "og_description": "CONVERSE x COMME DES GARÇONS PLAY. The iconic partnership between Converse and Comme des Garçons has brought the brand’s conceptual vision to streets across the globe for over a decade—using the playful heart and eyes logo in distinct ways. This new release brings back the fan-favorite Comme des Garçons PLAY heart and eyes logo on [&hellip;]",
+    "og_image": [[]],
+    "og_locale": "vi_VN",
+    "og_site_name": "OrderShoes",
+    "og_title": "Converse x Comme des Garçons PLAY Chuck 70 Low Top &middot; OrderShoes",
+    "og_type": "article",
+    "og_url": "http://converse.azdigi.shop/san-pham/converse-x-comme-des-garcons-play-chuck-70-low-top-10/",
+    "robots": {
+      "follow": "follow",
+      "index": "index",
+      "max-image-preview": "max-image-preview:large",
+      "max-snippet": "max-snippet:-1",
+      "max-video-preview": "max-video-preview:-1"
+    },
+    "schema": {"@context": "https://schema.org", "@graph": []},
+    "title": "Converse x Comme des Garçons PLAY Chuck 70 Low Top &middot; OrderShoes",
+    "twitter_card": "summary_large_image",
+    "twitter_misc": {"Ước tính thời gian đọc": "1 phút"}
+  }
+}

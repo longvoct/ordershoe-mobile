@@ -51,11 +51,9 @@ const LoginScreen = ({navigation}) => {
         },
       );
 
-      const {token} = response.data;
-      console.log('🚀 ~ handleLogin ~ token:', token);
+      const {token, user_email} = response.data;
       await AsyncStorage.setItem('accessToken', token);
-      await AsyncStorage.setItem('email', data?.email);
-      console.log('🚀 ~ handleLogin ~ data?.email:', data?.email);
+      await AsyncStorage.setItem('email', user_email);
 
       // Alert.alert('Login successful!');
       navigation.navigate('DrawerNavigation');
