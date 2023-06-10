@@ -13,7 +13,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="GetStartedScreen"
+        initialRouteName="LoginScreen"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="GetStartedScreen" component={GetStartedScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
