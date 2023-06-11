@@ -7,15 +7,12 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  Button,
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RenderHtml from 'react-native-render-html';
-import {Picker} from '@react-native-picker/picker';
-import {ButtonGroup} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import config from '../utils/config';
@@ -39,7 +36,16 @@ const ProductDetail = ({route, navigation}) => {
   const [heigthRender, setHeightRender] = useState(70);
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [selectedAttributes, setSelectedAttributes] = useState({});
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  const handleColorChange = color => {
+    setSelectedColor(color);
+  };
+
+  const handleSizeChange = size => {
+    setSelectedSize(size);
+  };
   const {itemId} = route.params;
 
   useEffect(() => {
@@ -49,7 +55,6 @@ const ProductDetail = ({route, navigation}) => {
   const getProduct = async () => {
     try {
       const response = await WooCommerceAPI.get(`/v3/products/${itemId}`);
-      console.log('🚀 ~ getNewProducts ~ response.data:', response.data);
       setProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -76,11 +81,11 @@ const ProductDetail = ({route, navigation}) => {
             variation: [
               {
                 attribute: 'pa_color',
-                value: selectedAttributes['1'],
+                value: selectedColor,
               },
               {
                 attribute: 'pa_size',
-                value: selectedAttributes['5'],
+                value: selectedSize,
               },
             ],
           },
@@ -101,16 +106,13 @@ const ProductDetail = ({route, navigation}) => {
     setIsLoading(false);
   };
 
-  const handleAttributeChange = (attributeId, value) => {
-    setSelectedAttributes(prevState => ({
-      ...prevState,
-      [attributeId]: value,
-    }));
-  };
-
   const handleQuantityChange = value => {
     setQuantity(value);
   };
+
+  const colorsVar = product?.attributes[0];
+  console.log('🚀 ~ ProductDetail ~ colorsVar:', colorsVar);
+  const sizesVar = product?.attributes[4];
 
   if (!product) {
     return (
@@ -211,8 +213,7 @@ const ProductDetail = ({route, navigation}) => {
                 marginRight: 20,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#ededed',
-                borderRadius: 8,
+                backgroundColor: '#e4e6eb',
                 maxWidth: 100,
               }}>
               <Text style={{color: '#37383c', fontFamily: 'Poppins-Medium'}}>
@@ -221,7 +222,7 @@ const ProductDetail = ({route, navigation}) => {
             </View>
             <Entypo
               name="star"
-              color="#000"
+              color="#ecb75c"
               style={{
                 fontSize: 22,
                 top: 2,
@@ -347,45 +348,180 @@ const ProductDetail = ({route, navigation}) => {
               )}
             </View>
           )}
-        </View>
-        {product.attributes.map(
-          attribute =>
-            attribute.variation && (
-              <View key={attribute.id} style={{marginBottom: 10}}>
-                <Text style={{fontWeight: 'bold'}}>{attribute.name}</Text>
-                <ButtonGroup
-                  buttons={attribute.options}
-                  selectedIndex={attribute.options.indexOf(
-                    selectedAttributes[attribute.id],
-                  )}
-                  onPress={selectedIndex =>
-                    handleAttributeChange(
-                      attribute.id,
-                      attribute.options[selectedIndex],
-                    )
-                  }
-                />
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: 15,
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{
+                color: '#000',
+                fontFamily: 'Poppins-SemiBold',
+                marginRight: 20,
+                fontSize: 14,
+              }}>
+              Quantity
+            </Text>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{
+                width: 30,
+                height: 30,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#000',
+              }}
+              onPress={() => handleQuantityChange(Math.max(1, quantity - 1))}>
+              <Text style={{lineHeight: 25, color: '#fff', fontSize: 25}}>
+                -
+              </Text>
+            </TouchableOpacity>
+            <Text style={{paddingHorizontal: 10}}>{quantity}</Text>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{
+                width: 30,
+                height: 30,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#000',
+              }}
+              onPress={() => handleQuantityChange(Math.max(1, quantity + 1))}>
+              <Text style={{lineHeight: 20, color: '#fff', fontSize: 20}}>
+                +
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* {product.attributes.map(
+            attribute =>
+              attribute.variation && (
+                <View key={attribute.id} style={{marginBottom: 10}}>
+                  <Text
+                    style={{
+                      marginTop: 15,
+                      fontFamily: 'Poppins-SemiBold',
+                      fontSize: 15,
+                      color: '#000',
+                    }}>
+                    {attribute.name}
+                  </Text>
+                  <ButtonGroup
+                    buttonContainerStyle={{width: '50%', flexWrap: 'wrap'}}
+                    buttons={attribute.options}
+                    selectedIndex={attribute.options.indexOf(
+                      selectedAttributes[attribute.id],
+                    )}
+                    onPress={selectedIndex =>
+                      handleAttributeChange(
+                        attribute.id,
+                        attribute.options[selectedIndex],
+                      )
+                    }
+                  />
+                </View>
+              ),
+          )} */}
+          {colorsVar && (
+            <View>
+              <Text
+                style={{
+                  marginTop: 15,
+                  fontFamily: 'Poppins-SemiBold',
+                  fontSize: 14,
+                  color: '#000',
+                }}>
+                Colors
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-between',
+                }}>
+                {colorsVar.options.length > 0 &&
+                  colorsVar.options.map((color, index) => (
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      key={index}
+                      style={{
+                        width: width / 2 - 15,
+                        marginRight: 5,
+                        marginTop: 5,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingHorizontal: 10,
+                        paddingVertical: 8,
+                        backgroundColor:
+                          selectedColor === color ? '#191a2e' : '#e4e6eb',
+                      }}
+                      onPress={() => handleColorChange(color)}>
+                      <Text
+                        numberOfLines={1}
+                        style={{
+                          textAlign: 'center',
+                          fontSize: 12,
+                          color: selectedColor === color ? '#fff' : '#050505',
+                          fontFamily: 'Poppins-Regular',
+                        }}>
+                        {color}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
               </View>
-            ),
-        )}
-        <Text>{JSON.stringify(selectedAttributes)}</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 10,
-          }}>
-          <Button
-            title="-"
-            onPress={() => handleQuantityChange(Math.max(1, quantity - 1))}
-          />
-          <Text style={{paddingHorizontal: 10}}>{quantity}</Text>
-          <Button
-            title="+"
-            onPress={() => handleQuantityChange(quantity + 1)}
-          />
+            </View>
+          )}
+
+          {sizesVar && (
+            <View>
+              <Text
+                style={{
+                  marginTop: 15,
+                  fontFamily: 'Poppins-SemiBold',
+                  fontSize: 14,
+                  color: '#000',
+                }}>
+                Sizes
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-between',
+                }}>
+                {sizesVar.options.length > 0 &&
+                  sizesVar.options.map((size, index) => (
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      key={index}
+                      style={{
+                        width: width / 3 - 20,
+                        marginTop: 5,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingHorizontal: 10,
+                        paddingVertical: 8,
+                        backgroundColor:
+                          selectedSize === size ? '#191a2e' : '#e4e6eb',
+                      }}
+                      onPress={() => handleSizeChange(size)}>
+                      <Text
+                        numberOfLines={1}
+                        style={{
+                          fontSize: 12,
+                          color: selectedSize === size ? '#fff' : '#050505',
+                          fontFamily: 'Poppins-Regular',
+                        }}>
+                        {size}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+              </View>
+            </View>
+          )}
         </View>
-        <View style={{marginBottom: 80}} />
+
+        <View style={{marginBottom: 100}} />
       </ScrollView>
     </View>
   );

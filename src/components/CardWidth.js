@@ -13,7 +13,6 @@ const CardWidth = ({product}) => {
         borderRadius: 16,
         backgroundColor: '#fafafd',
         padding: 10,
-        marginBottom: 20,
       }}>
       <View
         style={{
@@ -38,11 +37,11 @@ const CardWidth = ({product}) => {
       <View style={{height: '100%', width: '100%'}}>
         <Text
           style={{
-            fontSize: 15,
+            fontSize: 14,
             color: '#000',
             marginBottom: 5,
             width: 210,
-            fontFamily: 'Poppins-Medium',
+            fontFamily: 'Poppins-SemiBold',
           }}
           numberOfLines={1}>
           {product.name}
@@ -50,7 +49,6 @@ const CardWidth = ({product}) => {
         <View style={{flexDirection: 'row', width: '100%', marginTop: -4}}>
           <Text
             style={{
-              fontWeight: '500',
               color: '#757472',
               fontSize: 13,
               fontFamily: 'Poppins-Regular',
@@ -62,7 +60,6 @@ const CardWidth = ({product}) => {
           <Text
             style={{
               marginLeft: 10,
-              fontWeight: '500',
               color: '#000',
               fontSize: 13,
             }}
@@ -73,7 +70,6 @@ const CardWidth = ({product}) => {
           <Text
             style={{
               marginLeft: 10,
-              fontWeight: '500',
               color: '#757472',
               fontSize: 13,
               width: 80,
@@ -137,10 +133,11 @@ const CardWidth = ({product}) => {
           }}>
           <Text
             style={{
-              marginTop: 8,
+              marginTop: 4,
+              fontWeight: '500',
+              color: '#181930',
               fontSize: 15,
-              fontWeight: 600,
-              fontFamily: 'Poppins-SemiBold',
+              fontFamily: 'Poppins-Medium',
             }}
             numberOfLines={1}>
             ₫{product?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
