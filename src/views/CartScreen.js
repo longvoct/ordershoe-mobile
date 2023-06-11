@@ -1,20 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  ActivityIndicator,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {useState, useEffect} from 'react';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import config from '../utils/config';
-import Entypo from 'react-native-vector-icons/Entypo';
-import CardWidthCart from '../components/CardWidthCart';
 
-const {width} = Dimensions.get('window');
 const WooCommerceAPI = axios.create({
   baseURL: `${config.url}/wp-json/wc`,
   timeout: 10000,
@@ -27,137 +16,119 @@ const WooCommerceAPI = axios.create({
   },
 });
 
-const CartScreen = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [totalPriceOnCart, setTotalPriceOnCart] = useState(0);
+const CartItem = ({item, onUpdateCartItem}) => {
+  const [quantity, setQuantity] = useState(item.quantity);
 
-  const handleTotalPriceOnCart = (productId, totalPrice) => {
-    setTotalPriceOnCart(
-      prevTotalPrice =>
-        prevTotalPrice +
-        totalPrice -
-        cartItems.find(product => product.id === productId).prices.sale_price,
-    );
+  const handleQuantityChange = newQuantity => {
+    setQuantity(newQuantity);
+    onUpdateCartItem({...item, quantity: newQuantity});
   };
 
-  useEffect(() => {
-    getCartItems();
-  }, []);
+  return (
+    <View>
+      <Text>{item.name}</Text>
+      <Text>{item.prices.sale_price}</Text>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <TouchableOpacity
+          onPress={() => handleQuantityChange(quantity - 1)}
+          disabled={quantity <= 1}>
+          <Text>-</Text>
+        </TouchableOpacity>
+        <Text>{quantity}</Text>
+        <TouchableOpacity onPress={() => handleQuantityChange(quantity + 1)}>
+          <Text>+</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
-  const getCartItems = async () => {
-    const token = await AsyncStorage.getItem('accessToken');
-    setIsLoading(true);
+const CartScreen = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const fetchCartItems = async () => {
     try {
+      const token = await AsyncStorage.getItem('accessToken');
       const response = await WooCommerceAPI.get('store/v1/cart/items', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setCartItems(response.data);
-      console.log('🚀 ~ getCartItems ~ response.data:', response.data);
+      calculateTotalPrice(response.data);
     } catch (error) {
-      console.log('Get cart items error:', error.message);
+      console.error('fetchCartItems', error.response);
     }
-    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchCartItems();
+  }, [cartItems]);
+
+  const calculateTotalPrice = items => {
+    const total = items.reduce((acc, item) => {
+      return acc + item.prices.sale_price * item.quantity;
+    }, 0);
+    setTotalPrice(total);
+  };
+
+  const updateCartItem = async updatedItem => {
+    try {
+      const token = await AsyncStorage.getItem('accessToken');
+      const response = await WooCommerceAPI.put(
+        `store/v1/cart/items/${updatedItem.key}`,
+        updatedItem,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setCartItems(response.data);
+    } catch (error) {
+      console.log('🚀 ~ updateCartItem ~ error:', error.response);
+    }
+  };
+
+  const updateCart = async () => {
+    try {
+      const token = await AsyncStorage.getItem('accessToken');
+      await WooCommerceAPI.get('store/v1/cart', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      fetchCartItems();
+    } catch (error) {
+      console.log('🚀 ~ updateCart ~ error:', error.response);
+    }
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#fff',
-      }}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        persistentScrollbar={true}
-        style={{
-          backgroundColor: '#fff',
-          position: 'relative',
-        }}
-        stickyHeaderIndices={[0]}>
-        <View
-          style={{
-            width: '100%',
-            height: 60,
-            backgroundColor: '#fff',
-            elevation: 10,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingHorizontal: 25,
-              paddingTop: 15,
-              width: '100%',
-            }}>
-            <View
-              style={{
-                borderRadius: 40,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Image
-                  source={require('../assets/images/icons/back.png')}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    resizeMode: 'cover',
-                  }}
-                />
-              </TouchableOpacity>
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: 'black',
-                  marginLeft: 20,
-                  fontFamily: 'Poppins-SemiBold',
-                }}>
-                My Cart
-              </Text>
-            </View>
-            <Entypo name="dots-three-vertical" size={20} color="#000" />
-          </View>
-        </View>
-        {isLoading ? (
-          <View
-            style={{
-              flex: 1,
-              marginTop: 30,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#fff',
-            }}>
-            <ActivityIndicator size="large" color="#000" />
-          </View>
-        ) : cartItems.length > 0 ? (
-          <View
-            style={{
-              marginTop: 30,
-              paddingHorizontal: 25,
-              width: '100%',
-            }}>
-            {cartItems.map(product => {
-              return (
-                <CardWidthCart
-                  key={product.id}
-                  product={product}
-                  onUpdateQuantity={handleTotalPriceOnCart}
-                />
-              );
-            })}
-            <Text>Total: ₫{cartItems.length > 0 ? totalPriceOnCart : 0}</Text>
-          </View>
-        ) : (
-          <Text>Your cart is empty</Text>
-        )}
-        <View style={{marginBottom: 80}} />
-      </ScrollView>
+    <View>
+      <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 10}}>
+        Cart
+      </Text>
+      {cartItems.length === 0 ? (
+        <Text>Your cart is empty</Text>
+      ) : (
+        <>
+          <FlatList
+            data={cartItems}
+            keyExtractor={item => item.key}
+            renderItem={({item}) => (
+              <CartItem item={item} onUpdateCartItem={updateCartItem} />
+            )}
+          />
+          <Text style={{marginTop: 10}}>Total price: {totalPrice}</Text>
+          <TouchableOpacity
+            style={{backgroundColor: 'green', padding: 10, marginTop: 10}}
+            onPress={updateCart}>
+            <Text style={{color: 'white'}}>Update cart</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
