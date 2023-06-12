@@ -1,12 +1,16 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomDrawer from './CustomDrawer';
 import TabsNavigation from './TabsNavigation';
 import MenScreen from '../views/MenScreen';
 import WomenScreen from '../views/WomenScreen';
 import KidsScreen from '../views/KidsScreen';
 import StoreScreen from '../views/StoreScreen';
+import AddProductScreenScreen from '../views/AddProductScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -53,14 +57,14 @@ function DrawerNavigation({navigation}) {
         component={MenScreen}
         options={{
           drawerIcon: ({color}) => (
-            <FontAwesome
-              name="dashboard"
+            <MaterialCommunityIcons
+              name="shoe-cleat"
               color={color}
               style={{
-                fontSize: 22,
+                fontSize: 26,
                 top: 2,
                 left: 0,
-                width: 22,
+                width: 30,
                 height: 30,
               }}
             />
@@ -72,14 +76,14 @@ function DrawerNavigation({navigation}) {
         component={WomenScreen}
         options={{
           drawerIcon: ({color}) => (
-            <FontAwesome
-              name="dashboard"
+            <MaterialCommunityIcons
+              name="shoe-sneaker"
               color={color}
               style={{
-                fontSize: 22,
+                fontSize: 26,
                 top: 2,
                 left: 0,
-                width: 22,
+                width: 30,
                 height: 30,
               }}
             />
@@ -93,8 +97,27 @@ function DrawerNavigation({navigation}) {
         component={KidsScreen}
         options={{
           drawerIcon: ({color}) => (
-            <FontAwesome
-              name="dashboard"
+            <MaterialCommunityIcons
+              name="shoe-print"
+              color={color}
+              style={{
+                fontSize: 26,
+                top: 2,
+                left: 0,
+                width: 30,
+                height: 30,
+              }}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Store"
+        component={StoreScreen}
+        options={{
+          drawerIcon: ({color}) => (
+            <Entypo
+              name="shop"
               color={color}
               style={{
                 fontSize: 22,
@@ -108,12 +131,12 @@ function DrawerNavigation({navigation}) {
         }}
       />
       <Drawer.Screen
-        name="Store"
-        component={StoreScreen}
+        name="AddProductScreen"
+        component={AddProductScreenScreen}
         options={{
           drawerIcon: ({color}) => (
-            <FontAwesome
-              name="dashboard"
+            <Ionicons
+              name="add-circle"
               color={color}
               style={{
                 fontSize: 22,

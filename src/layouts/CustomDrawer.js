@@ -39,7 +39,7 @@ const CustomDrawer = ({...props}) => {
           style={{
             padding: 20,
           }}
-          source={require('../assets/images/decoration/drawer-image.png')}>
+          source={require('../assets/images/decoration/drawer-image.webp')}>
           <View
             style={{
               backgroundColor: '#Fff',
