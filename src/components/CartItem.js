@@ -19,6 +19,7 @@ const CartItem = ({item, onUpdateCartItem}) => {
         borderRadius: 16,
         backgroundColor: '#fafafd',
         padding: 10,
+        marginBottom: 15,
       }}>
       <View
         style={{

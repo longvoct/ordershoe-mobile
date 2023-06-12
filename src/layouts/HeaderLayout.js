@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getUserInfo} from '../utils/auth';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 const HeaderLayout = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -41,7 +42,7 @@ const HeaderLayout = () => {
             justifyContent: 'space-between',
           }}>
           <TouchableOpacity activeOpacity={0.8} style={{marginRight: 15}}>
-            {userInfo?.avatar && (
+            {userInfo?.avatar ? (
               <Image
                 source={{
                   uri: userInfo?.avatar,
@@ -53,6 +54,13 @@ const HeaderLayout = () => {
                   resizeMode: 'cover',
                   borderRadius: 80,
                 }}
+              />
+            ) : (
+              <SkeletonPlaceholder.Item
+                width={60}
+                height={60}
+                backgroundColor={'#f2f2f2'}
+                borderRadius={50}
               />
             )}
           </TouchableOpacity>
@@ -67,15 +75,24 @@ const HeaderLayout = () => {
               }}>
               Welcome back👋
             </Text>
-            <Text
-              style={{
-                marginTop: -5,
-                fontSize: 20,
-                color: '#212121',
-                fontFamily: 'Poppins-SemiBold',
-              }}>
-              {userInfo?.name}
-            </Text>
+            {userInfo ? (
+              <Text
+                style={{
+                  marginTop: -5,
+                  fontSize: 20,
+                  color: '#212121',
+                  fontFamily: 'Poppins-SemiBold',
+                }}>
+                {userInfo?.name}
+              </Text>
+            ) : (
+              <SkeletonPlaceholder.Item
+                width={120}
+                height={20}
+                backgroundColor={'#f2f2f2'}
+                borderRadius={10}
+              />
+            )}
           </View>
         </View>
         <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>

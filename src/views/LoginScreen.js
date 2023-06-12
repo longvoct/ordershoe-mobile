@@ -14,6 +14,10 @@ import config from '../utils/config';
 import {useForm, Controller} from 'react-hook-form';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
+import FlashMessage, {
+  showMessage,
+  hideMessage,
+} from 'react-native-flash-message';
 
 const schema = Yup.object({
   email: Yup.string()
@@ -55,12 +59,20 @@ const LoginScreen = ({navigation}) => {
       await AsyncStorage.setItem('accessToken', token);
       await AsyncStorage.setItem('email', user_email);
 
-      // Alert.alert('Login successful!');
-      navigation.navigate('DrawerNavigation');
+      showMessage({
+        message: 'Login successful!',
+        type: 'success',
+      });
+      setTimeout(() => {
+        navigation.navigate('DrawerNavigation');
+      }, 1500);
     } catch (error) {
       console.log('Message:', errors);
       setLoading(false);
-      // Alert.alert('Login failed. Please check your credentials.');
+      showMessage({
+        message: 'Login failed. Please check your credentials.',
+        type: 'danger',
+      });
     }
     setLoading(false);
   };
@@ -362,6 +374,7 @@ const LoginScreen = ({navigation}) => {
           </Text>
         </Text>
       </View>
+      <FlashMessage position="top" style={{top: 30}} />
     </View>
   );
 };

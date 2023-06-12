@@ -38,6 +38,12 @@ const ProductDetail = ({route, navigation}) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [widthLoading, setWidthLoading] = useState();
+
+  const onLayout = event => {
+    const {width} = event.nativeEvent.layout;
+    setWidthLoading(width);
+  };
 
   const handleColorChange = color => {
     setSelectedColor(color);
@@ -50,7 +56,7 @@ const ProductDetail = ({route, navigation}) => {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [selectedColor, selectedSize]);
 
   const getProduct = async () => {
     try {
@@ -96,8 +102,8 @@ const ProductDetail = ({route, navigation}) => {
           },
         );
         console.log('Add to cart success:', response.data);
-        selectedColor(null);
-        selectedSize(null);
+        setSelectedColor(null);
+        setSelectedSize(null);
       } else {
         console.log('Product ID is not available');
       }
@@ -264,19 +270,40 @@ const ProductDetail = ({route, navigation}) => {
                 flexDirection: 'row',
                 paddingVertical: 12,
               }}>
-              <Ionicons
-                name="ios-cart-sharp"
-                color="#fff"
-                style={{
-                  marginRight: 10,
-                  fontSize: 20,
-                  width: 20,
-                }}
-              />
-              {product?.id && (
-                <Text style={{color: '#fff', fontFamily: 'Poppins-Medium'}}>
-                  Add to Cart
-                </Text>
+              {product?.id && !isLoading && (
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                  }}>
+                  <Ionicons
+                    name="ios-cart-sharp"
+                    color="#fff"
+                    style={{
+                      marginRight: 10,
+                      fontSize: 20,
+                      width: 20,
+                    }}
+                  />
+                  <Text style={{color: '#fff', fontFamily: 'Poppins-Medium'}}>
+                    Add to Cart
+                  </Text>
+                </View>
+              )}
+              {product?.id && isLoading && (
+                <ActivityIndicator
+                  onLayout={onLayout}
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    transform: widthLoading
+                      ? [{translateX: -0.5 * widthLoading}]
+                      : '',
+                  }}
+                  size="small"
+                  color="#fff"
+                />
               )}
             </TouchableOpacity>
             <TouchableOpacity

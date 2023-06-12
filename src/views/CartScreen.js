@@ -28,7 +28,7 @@ const WooCommerceAPI = axios.create({
   },
 });
 
-const CartScreen = () => {
+const CartScreen = ({navigation}) => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -161,7 +161,7 @@ const CartScreen = () => {
             paddingHorizontal: 25,
             marginTop: 30,
           }}>
-          {cartItems.length === 0 && (
+          {cartItems.length === 0 && !loading && (
             <View
               style={{
                 marginTop: 100,
@@ -241,17 +241,22 @@ const CartScreen = () => {
             </TouchableOpacity>
           )}
         </View>
+        <View style={{marginBottom: 210}} />
       </ScrollView>
       {cartItems.length > 0 && (
         <View
           style={{
             height: 175,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
             flexDirection: 'row',
             position: 'absolute',
             bottom: 0,
             paddingHorizontal: 25,
             backgroundColor: '#fff',
             elevation: 10,
+            borderWidth: 1,
+            borderColor: '#eee',
             width: width,
             left: '50%',
             transform: [{translateX: -width / 2}],
