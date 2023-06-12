@@ -131,7 +131,7 @@ const HomeScreen = ({navigation}) => {
           <FlatList
             style={{width: '100%'}}
             data={featuredProducts}
-            renderItem={({item}) => <CardProduct item={item}></CardProduct>}
+            renderItem={({item}) => <CardProduct item={item} />}
             keyExtractor={item => item.id}
             numColumns={2}
           />

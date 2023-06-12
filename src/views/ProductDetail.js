@@ -96,6 +96,8 @@ const ProductDetail = ({route, navigation}) => {
           },
         );
         console.log('Add to cart success:', response.data);
+        selectedColor(null);
+        selectedSize(null);
       } else {
         console.log('Product ID is not available');
       }
