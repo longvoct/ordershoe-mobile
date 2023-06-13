@@ -83,7 +83,7 @@ const HomeScreen = ({navigation}) => {
           position: 'relative',
         }}
         stickyHeaderIndices={[0]}>
-        <HeaderLayout />
+        <HeaderLayout navigation={navigation} />
         <View
           style={{
             marginTop: 20,
@@ -168,18 +168,16 @@ const HomeScreen = ({navigation}) => {
           ) : (
             <FlatList
               style={{width: '100%'}}
-              data={Array(4).fill(null)}
+              data={Array(8).fill(null)}
               showsHorizontalScrollIndicator={false}
               numColumns={2}
               renderItem={(item, index) => (
                 <SkeletonPlaceholder.Item
                   key={index}
-                  width={200}
+                  width={(width - 50) / 2 - 10}
                   height={150}
                   style={{
                     marginTop: 15,
-                    width: (width - 50) / 2 - 10,
-                    height: '100%',
                     marginHorizontal: 10,
                   }}
                   backgroundColor={'#f2f2f2'}

@@ -15,9 +15,9 @@ export const getUserInfo = async () => {
     },
   });
 
-  const {name, avatar_urls} = response.data;
+  const {name, avatar_urls, id} = response.data;
 
   const avatar = avatar_urls[96];
 
-  return {token, email, name, avatar};
+  return {token, email, name, avatar, response, id};
 };

@@ -10,7 +10,7 @@ import HomeMain from '../views/HomeMain';
 
 const Tab = createBottomTabNavigator();
 
-const TabsNavigation = () => {
+const TabsNavigation = ({navigation}) => {
   return (
     <Tab.Navigator
       screenOptions={{

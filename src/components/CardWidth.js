@@ -51,6 +51,7 @@ const CardWidth = ({product}) => {
             style={{
               color: '#757472',
               fontSize: 13,
+              width: 100,
               fontFamily: 'Poppins-Regular',
             }}
             numberOfLines={1}>

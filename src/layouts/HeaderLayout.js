@@ -10,7 +10,7 @@ import React, {useEffect, useState} from 'react';
 import {getUserInfo} from '../utils/auth';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
-const HeaderLayout = () => {
+const HeaderLayout = ({navigation}) => {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
@@ -41,7 +41,10 @@ const HeaderLayout = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <TouchableOpacity activeOpacity={0.8} style={{marginRight: 15}}>
+          <TouchableOpacity
+            onPress={() => navigation.openDrawer()}
+            activeOpacity={0.8}
+            style={{marginRight: 15}}>
             {userInfo?.avatar ? (
               <Image
                 source={{
@@ -153,7 +156,9 @@ const HeaderLayout = () => {
             fontSize: 14,
           }}
           placeholder="What are you looking for?"
-          onFocus={() => {}}
+          onFocus={() => {
+            navigation.navigate('SearchView');
+          }}
         />
         <Image
           source={require('../assets/images/icons/filter.png')}

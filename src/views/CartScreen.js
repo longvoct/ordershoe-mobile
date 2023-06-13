@@ -9,12 +9,13 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import config from '../utils/config';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CartItem from '../components/CartItem';
+import {getUserInfo} from '../utils/auth';
 
 const {width} = Dimensions.get('window');
+const {token} = getUserInfo();
 
 const WooCommerceAPI = axios.create({
   baseURL: `${config.url}/wp-json/wc`,
@@ -32,9 +33,9 @@ const CartScreen = ({navigation}) => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(false);
+
   const fetchCartItems = async () => {
     try {
-      const token = await AsyncStorage.getItem('accessToken');
       const response = await WooCommerceAPI.get('store/v1/cart/items', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -60,7 +61,6 @@ const CartScreen = ({navigation}) => {
 
   const updateCartItem = async updatedItem => {
     try {
-      const token = await AsyncStorage.getItem('accessToken');
       const response = await WooCommerceAPI.put(
         `store/v1/cart/items/${updatedItem.key}`,
         updatedItem,
@@ -79,13 +79,11 @@ const CartScreen = ({navigation}) => {
   const updateCart = async () => {
     try {
       setLoading(true);
-      const token = await AsyncStorage.getItem('accessToken');
       const response = await WooCommerceAPI.get('store/v1/cart', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log('🚀 ~ updateCart ~ response:', response.data);
       fetchCartItems();
       setLoading(false);
     } catch (error) {
@@ -203,7 +201,7 @@ const CartScreen = ({navigation}) => {
                 onUpdateCartItem={updateCartItem}
               />
             ))}
-          {loading && cartItems.length > 0 && (
+          {loading && (
             <View
               style={{
                 flex: 1,
@@ -267,7 +265,7 @@ const CartScreen = ({navigation}) => {
             </Text>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 17,
                 fontFamily: 'Poppins-SemiBold',
                 color: '#282828',
               }}

@@ -11,6 +11,8 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {getUserInfo} from '../utils/auth';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const CustomDrawer = ({...props}) => {
   const [userInfo, setUserInfo] = useState(null);
@@ -87,11 +89,11 @@ const CustomDrawer = ({...props}) => {
         {/* Cài đặt */}
         <TouchableOpacity
           style={{flexDirection: 'row', padding: 10, borderRadius: 8}}>
-          {/* <Ionicons name="ios-settings-sharp" size={22} color="#000" /> */}
+          <Ionicons name="ios-settings-sharp" size={22} color="#000" />
           <Text
             style={{
               marginLeft: 20,
-              color: '#000',
+              color: '#191a2e',
               fontWeight: '500',
               fontSize: 16,
             }}>
@@ -102,11 +104,11 @@ const CustomDrawer = ({...props}) => {
           style={{flexDirection: 'row', padding: 10, borderRadius: 8}}
           // onPress={handleSignOut}
         >
-          {/* <AntDesign name="logout" size={22} color="#000" /> */}
+          <AntDesign name="logout" size={22} color="#000" />
           <Text
             style={{
               marginLeft: 20,
-              color: '#000',
+              color: '#191a2e',
               fontWeight: '500',
               fontSize: 16,
             }}>

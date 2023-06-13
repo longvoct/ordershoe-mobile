@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import HomeScreen from './HomeScreen';
 import ProductDetail from './ProductDetail';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import SearchView from './SearchView';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,7 @@ const config = {
   },
 };
 
-const HomeMain = () => {
+const HomeMain = ({navigation}) => {
   return (
     <Stack.Navigator
       initialRouteName="HomeScreen"
@@ -29,7 +30,7 @@ const HomeMain = () => {
         },
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      {/* <Stack.Screen name="SearchFilterView" component={SearchFilterView} /> */}
+      <Stack.Screen name="SearchView" component={SearchView} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
     </Stack.Navigator>
   );

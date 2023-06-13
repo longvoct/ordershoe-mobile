@@ -22,7 +22,6 @@ const GetStartedScreen = ({navigation}) => {
     return () => clearTimeout(timeoutAwait);
   }, []);
 
-  // Hàm xử lý sự kiện khi bấm nút "Bắt đầu"
   const handleStartPress = () => {
     navigation.navigate('LoginScreen');
   };
