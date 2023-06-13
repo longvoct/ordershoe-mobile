@@ -75,6 +75,20 @@ const AllOrdersScreen = ({navigation}) => {
     </View>
   );
 
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#fff',
+        }}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+
   return (
     <View
       style={{
@@ -145,21 +159,14 @@ const AllOrdersScreen = ({navigation}) => {
             marginTop: 30,
             paddingHorizontal: 25,
           }}>
-          {loading ? (
-            <View
-              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-              <ActivityIndicator size="large" color="#000" />
-            </View>
-          ) : (
-            <FlatList
-              data={orders}
-              renderItem={renderOrder}
-              keyExtractor={item => item.id.toString()}
-              ListEmptyComponent={
-                <Text style={styles.emptyOrdersText}>You have no orders</Text>
-              }
-            />
-          )}
+          <FlatList
+            data={orders}
+            renderItem={renderOrder}
+            keyExtractor={item => item.id.toString()}
+            ListEmptyComponent={
+              <Text style={styles.emptyOrdersText}>You have no orders</Text>
+            }
+          />
         </ScrollView>
       </ScrollView>
     </View>

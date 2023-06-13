@@ -115,7 +115,7 @@ const StoreScreen = ({navigation}) => {
                   marginLeft: 20,
                   fontFamily: 'Poppins-SemiBold',
                 }}>
-                My Orders
+                Store
               </Text>
             </View>
             <Entypo name="dots-three-vertical" size={20} color="#000" />
